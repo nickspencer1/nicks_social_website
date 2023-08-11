@@ -5,7 +5,9 @@ import Post from "@/app/components/Post"
 import { PostType } from "@/app/types/Post"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+import { StaticImport } from "next/dist/shared/lib/get-img-props"
 import Image from "next/image"
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode } from "react"
 
 type URL = {
     params: {
@@ -35,7 +37,11 @@ export default function PostDetail(url: URL){
                 comments={data.Comment}
             />
             <AddComment id={data?.id}/>
-            {data?.Comment?.map((comment) => (
+            {data?.Comment?.map((comment: { 
+                id: Key | null | undefined; 
+                user: { image: string | StaticImport; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined }; 
+                createdAt: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; 
+                message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined }) => (
                 <div key={comment.id} className="my-6 bg-white p-8 rounded-md">
                     <div className="flex items-center gap-2">
                         <Image 

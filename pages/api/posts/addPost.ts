@@ -20,7 +20,7 @@ export default async function handle(
         //Get User
         const prismaUser = await prisma.user.findUnique({
             where: {
-                email: session?.user?.email
+                email: session?.user?.email as string
             }
         })
         
@@ -36,7 +36,7 @@ export default async function handle(
             const result = await prisma.post.create({
                 data: {
                     title,
-                    userId: prismaUser.id
+                    userId: prismaUser?.id as string
                 },
             })
             res.status(200).json(result)
